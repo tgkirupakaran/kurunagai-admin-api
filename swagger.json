@@ -554,6 +554,248 @@
             }
           }
         }
+      },
+      "/invites": {
+        "get": {
+          "summary": "Get all invites",
+          "tags": [
+            "Invite"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Invite"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new invite",
+          "tags": [
+            "Invite"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Invite object that needs to be created",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          }
+        }
+      },
+      "/invites/{id}": {
+        "get": {
+          "summary": "Get an invite by ID",
+          "tags": [
+            "Invite"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the invite",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update an invite",
+          "tags": [
+            "Invite"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the invite",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Invite object that needs to be updated",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Invite"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete an invite",
+          "tags": [
+            "Invite"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the invite",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            }
+          }
+        }
+      },
+      "/photos": {
+        "get": {
+          "summary": "Get all photos",
+          "tags": [
+            "Photo"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Photo"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new photo",
+          "tags": [
+            "Photo"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Photo object that needs to be created",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Photo"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created",
+              "schema": {
+                "$ref": "#/definitions/Photo"
+              }
+            }
+          }
+        }
+      },
+      "/photos/{id}": {
+        "get": {
+          "summary": "Get a photo by ID",
+          "tags": [
+            "Photo"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the photo",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Photo"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a photo",
+          "tags": [
+            "Photo"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the photo",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Photo object that needs to be updated",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Photo"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Photo"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a photo",
+          "tags": [
+            "Photo"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of the photo",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Content"
+            }
+          }
+        }
       }
     },
     "definitions": {
