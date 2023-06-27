@@ -25,7 +25,7 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo PLANET_SOURCE_DB_HOST=${{ env.PLANET_SOURCE_DB_HOST }}' >> .env
+          echo PLANET_SOURCE_DB_HOST=${{ env.PLANET_SOURCE_DB_HOST }} >> .env
           echo PLANET_SOURCE_DB_USER=${{ env.PLANET_SOURCE_DB_USER }} >> .env
           echo PLANET_SOURCE_DB_PASSWORD=${{ secrets.PLANET_SOURCE_DB_PASSWORD }} >> .env
           echo PLANET_SOURCE_DB_NAME=${{ env.PLANET_SOURCE_DB_NAME }} >> .env
