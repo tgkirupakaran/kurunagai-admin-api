@@ -25,16 +25,16 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo PLANET_SOURCE_DB_HOST=${{ env.PLANET_SOURCE_DB_HOST }} >> .env
-          echo PLANET_SOURCE_DB_USER=${{ env.PLANET_SOURCE_DB_USER }} >> .env
+          echo PLANET_SOURCE_DB_HOST=${{ vars.PLANET_SOURCE_DB_HOST }} >> .env
+          echo PLANET_SOURCE_DB_USER=${{ vars.PLANET_SOURCE_DB_USER }} >> .env
           echo PLANET_SOURCE_DB_PASSWORD=${{ secrets.PLANET_SOURCE_DB_PASSWORD }} >> .env
-          echo PLANET_SOURCE_DB_NAME=${{ env.PLANET_SOURCE_DB_NAME }} >> .env
+          echo PLANET_SOURCE_DB_NAME=${{ vars.PLANET_SOURCE_DB_NAME }} >> .env
           cat .env
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
-          username: '${{ env.DOCKER_HUB_USER }}'
+          username: '${{ vars.DOCKER_HUB_USER }}'
           password: '${{ secrets.DOCKER_ACCESS_TOKEN }}'
       
       - name: Extract metadata (tags, labels) for Docker
