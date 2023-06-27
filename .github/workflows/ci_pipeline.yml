@@ -3,13 +3,21 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  build_and_publish_image:
+  build:
+    name: Steps to validate application build
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+      - name: Echo
+        run: |
+          echo Build process
+
+  deployment:
     name: Build & Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    environment: Development
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -17,16 +25,17 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo PLANET_SOURCE_DB_HOST=${{ secrets.PLANET_SOURCE_DB_HOST }} >> .env
-          echo PLANET_SOURCE_DB_USER=${{ secrets.PLANET_SOURCE_DB_USER }} >> .env
+          echo PLANET_SOURCE_DB_HOST=${{ env.PLANET_SOURCE_DB_HOST }}' >> .env
+          echo PLANET_SOURCE_DB_USER=${{ env.PLANET_SOURCE_DB_USER }} >> .env
           echo PLANET_SOURCE_DB_PASSWORD=${{ secrets.PLANET_SOURCE_DB_PASSWORD }} >> .env
-          echo PLANET_SOURCE_DB_NAME=${{ secrets.PLANET_SOURCE_DB_NAME }} >> .env
+          echo PLANET_SOURCE_DB_NAME=${{ env.PLANET_SOURCE_DB_NAME }} >> .env
+          cat .env
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
-          username: '${{ secrets.DOCKER_USER }}'
-          password: '${{ secrets.DOCKER_USER }}'
+          username: '${{ env.DOCKER_HUB_USER }}'
+          password: '${{ secrets.DOCKER_ACCESS_TOKEN }}'
       
       - name: Extract metadata (tags, labels) for Docker
         id: meta

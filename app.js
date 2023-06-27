@@ -24,11 +24,6 @@ app.get("/", (req, res) => {
 // Serve Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Test Results
-app.get('/tests',function(req,res){
-  res.sendFile(path.join(__dirname+'tests/result/index.html'));
-});
-
 // Serve Swagger Stats
 app.use(swStats.getMiddleware({swaggerSpec:swaggerDocument}));
 
