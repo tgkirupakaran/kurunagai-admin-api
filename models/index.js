@@ -23,5 +23,6 @@ db.Invoice = require('../models/Invoice')(sequelize, Sequelize);
 db.Payment = require('../models/Payment')(sequelize, Sequelize);
 db.Subscription = require('../models/Subscription')(sequelize, Sequelize);
 db.User = require('../models/User')(sequelize, Sequelize);
+db.Invite = require('../models/Invite')(sequelize, Sequelize);
 
 module.exports = db;

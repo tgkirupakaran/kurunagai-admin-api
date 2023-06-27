@@ -7,25 +7,30 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  push_to_registry:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Build and Push to DockerHub
-      uses: MaximilianoBz/dockerhub-buildpush@v1.1
-      with:
-        # Docker Registry Url, eg: docker.io
-        registry_url: 
-        # Docker Image Repository Name, eg: username/demo-app
-        repository_name: 
-        # Docker Login UserName, from: https://hub.docker.com/
-        user_name: 
-        # Docker Login Access Token, from: https://hub.docker.com/
-        password: 
-        # Image Build Version
-        image_version: 
-        # Docker File Directory, Default Current Directory (.)
-        docker_file: # optional, default is .
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: tgkirupakaran
+          password: dckr_pat_UCMSwUNYdEor8nlw_Fpy1fTD_w4
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: tgkirupakaran/kurunagai-admin-api
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

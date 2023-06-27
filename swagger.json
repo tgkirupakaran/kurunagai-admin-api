@@ -566,12 +566,44 @@
           "username": {
             "type": "string"
           },
-          "password": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
             "type": "string"
           },
           "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "google_id": {
+            "type": "string"
+          },
+          "apple_id": {
+            "type": "string"
+          },
+          "microsoft_id": {
+            "type": "string"
+          },
+          "role": {
             "type": "string",
-            "format": "email"
+            "enum":[
+              "CUSTOMER",
+              "ADMIN",
+              "SUPERADMIN",
+              "EXECUTIVEBOARDMEMBER"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum":[
+              "ACTIVE",
+              "INVITED",
+              "DISABLED",
+              "INACTIVE"
+            ]
           }
         }
       },
@@ -579,19 +611,18 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           "user_id": {
             "type": "string"
           },
           "charges": {
-            "type": "integer",
-            "format": "int64"
+            "type": "number",
+            "format": "double"
           },
           "discounts": {
-            "type": "integer",
-            "format": "int64"
+            "type": "number",
+            "format": "double"
           },
           "description": {
             "type": "string"
@@ -600,7 +631,13 @@
             "type": "string"
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "SENT",
+              "VIEWED",
+              "PAID"
+            ]
           },
           "amount": {
             "type": "number",
@@ -612,14 +649,19 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           "user_id": {
             "type": "string"
           },
           "plan_name": {
-            "type": "string"
+            "type": "string",
+            "enum":[
+              "STANDARD",
+              "FREE",
+              "FREEMIUM",
+              "LIMITED"
+            ]
           },
           "active": {
             "type": "boolean"
@@ -634,8 +676,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           "invoice_id": {
             "type": "integer",
@@ -645,9 +686,88 @@
             "type": "number",
             "format": "double"
           },
-          "payment_date": {
+          "date": {
             "type": "string",
             "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "COMPLETE",
+              "INCOMPLETE"
+            ]
+          }
+        }
+      },
+      "Photo":{
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "album_id": {
+            "type": "string"
+          },
+          "captured_by": {
+            "type": "string"
+          },
+          "captured_on": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "captured_at": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "string"
+          },
+          "other_meta_data": {
+            "type": "string"
+          }
+        }
+      },
+      "Invite":{
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "CUSTOMER",
+              "ADMIN",
+              "SUPERADMIN",
+              "EXECUTIVEBOARDMEMBER"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "JOINREQUEST",
+              "VERIFICATION"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "CREATED",
+              "SENT",
+              "VERIFIED",
+              "EXPIRED"
+            ]
           }
         }
       }

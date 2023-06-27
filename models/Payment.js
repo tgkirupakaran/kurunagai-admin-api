@@ -1,9 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
 const Payment = sequelize.define('Payment', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     primaryKey: true,
-    autoIncrement: true,
+    defaultValue: Sequelize.UUIDV4
   },
   invoice_id: {
     type: Sequelize.INTEGER,
@@ -12,9 +12,13 @@ const Payment = sequelize.define('Payment', {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
   },
-  payment_date: {
+  date: {
     type: Sequelize.DATE,
+  },
+  status: {
+    type: Sequelize.ENUM('COMPLETE','INCOMPLETE'),
   }
+
 
 });
 

@@ -31,6 +31,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/subscriptions', require('./routes/subscriptions'));
 app.use('/api/payments', require('./routes/payments'));
 app.use('/api/invoices', require('./routes/invoices'));
+app.use('/api/invites', require('./routes/invites'));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');

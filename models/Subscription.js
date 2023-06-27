@@ -1,9 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
 const Subscription = sequelize.define('Subscription', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     primaryKey: true,
-    autoIncrement: true,
+    defaultValue: Sequelize.UUIDV4
   },
   user_id: {
     type: Sequelize.STRING,
@@ -11,8 +11,8 @@ const Subscription = sequelize.define('Subscription', {
   plan_name: {
     type: Sequelize.ENUM('STANDARD', 'FREE','FREEMIUM','LIMITED'),
     // 'STANDARD' - PAYG 
-    // 'FREE' - limited usage size.
-    // 'FREEMIUM' - Free unlimited usage until time.
+    // 'FREE' - limited usage size in limited time.
+    // 'FREEMIUM' - Free unlimited usage limited time.
     // 'LIMITED' - Read Only until 3 months.
     allowNull: false,
   },

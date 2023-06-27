@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models').User;
 const sha256 = require('sha256');
 const bcrypt = require("bcrypt")
+const crypto = require("crypto")
 
 // Create a user
 router.post('/', async (req, res) => {

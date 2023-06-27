@@ -1,9 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
 const Invoice = sequelize.define('Invoice', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     primaryKey: true,
-    autoIncrement: true,
+    defaultValue: Sequelize.UUIDV4
   },
   user_id: {
     type: Sequelize.STRING,
