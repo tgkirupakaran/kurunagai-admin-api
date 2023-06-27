@@ -34,8 +34,8 @@ jobs:
         with:
           images: '${{ vars.DOCKER_HUB_REPO_IMAGE_NAME }}'
           tags: |
-            type=raw,value=latest
-            type=raw,value=v0.0.${{github.run_number}}-${{github.run_attempt}}
+            type=raw,value=dev-latest
+            type=raw,value=v0.0.${{github.run_number}}-${{github.run_attempt}}-dev
       
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
