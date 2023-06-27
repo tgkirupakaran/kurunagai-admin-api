@@ -1,8 +1,10 @@
+require('dotenv').config()
+
 module.exports = {
-    HOST: "aws.connect.psdb.cloud",
-    USER: "9dnzltjc226auy37kam8",
-    PASSWORD: "pscale_pw_1VRdvFsvI3eYPkoYDPkL5sRV7J6myoL7WHXBrAMtTd7",
-    DB: "kurunagaidb",
+    HOST: process.env.PLANET_SOURCE_DB_HOST,
+    USER: process.env.PLANET_SOURCE_DB_USER,
+    PASSWORD: process.env.PLANET_SOURCE_DB_PASSWORD,
+    DB: process.env.PLANET_SOURCE_DB_NAME,
     dialect: "mysql",
     dialectOptions: {
       ssl: {
