@@ -8,7 +8,18 @@ module.exports = (sequelize, Sequelize) => {
       user_id: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        references: {
+          model: 'users', 
+          key: 'id', 
+       }
+      },
+      email_id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       role: {
         type: Sequelize.ENUM('CUSTOMER', 'ADMIN','SUPERADMIN','EXECUTIVEBOARDMEMBER'),

@@ -1,63 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const Subscription = require('../models').Subscription;
+const Model = require('../models').Subscription;
+const query = require('../interfaces/query/fetch');
+const create = require('../interfaces/command/create');
+const update = require('../interfaces/command/update');
+const del = require('../interfaces/command/delete');
 
-// Create a subscription
+// Create a Model
 router.post('/', async (req, res) => {
-  try {
-    const subscription = await Subscription.create(req.body);
-    res.json(subscription);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+  let result = await create.createOne(req,Model);
+  res.status(result.statusCode).json(result);
+
 });
 
-// Retrieve all subscriptions
+// Retrieve all items
 router.get('/', async (req, res) => {
-  try {
-    const subscriptions = await Subscription.findAll();
-    res.json(subscriptions);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  let result = await query.getAll(req,Model);
+  res.status(result.statusCode).json(result);
 });
 
-// Retrieve a subscription by ID
-router.get('/:id', getSubscription, (req, res) => {
-  res.json(res.subscription);
+// Retrieve a item by ID
+router.get('/:id', getItem, (req, res) => {
+  res.json(res.content);
 });
 
-// Update a subscription
-router.patch('/:id', getSubscription, async (req, res) => {
-  try {
-    await res.subscription.update(req.body);
-    res.json(res.subscription);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// Update a item
+router.patch('/:id', getItem, async (req, res) => {
+  const result = await update.updateItem(req,res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Delete a subscription
-router.delete('/:id', getSubscription, async (req, res) => {
-  try {
-    await res.subscription.destroy();
-    res.json({ message: 'Subscription deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Delete a item
+router.delete('/:id', getItem, async (req, res) => {
+  const result = await del.deleteItem(res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Middleware to get a subscription by ID
-async function getSubscription(req, res, next) {
-  try {
-    const subscription = await Subscription.findByPk(req.params.id);
-    if (!subscription) {
-      return res.status(404).json({ message: 'Subscription not found' });
-    }
-    res.subscription = subscription;
+// Middleware to get a item by ID
+async function getItem(req, res, next) {
+  const result = await query.getOneById(req,Model)
+  if (result.statusCode ==200){
+    res.item = result.data;
+    res.content = result;
     next();
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  }
+  else{
+    res.status(result.statusCode).json(result)
   }
 }
 

@@ -1,63 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const Invoice = require('../models/').Invoice;
+const Model = require('../models').Invoice;
+const query = require('../interfaces/query/fetch');
+const create = require('../interfaces/command/create');
+const update = require('../interfaces/command/update');
+const del = require('../interfaces/command/delete');
 
-// Create an invoice
+// Create a Model
 router.post('/', async (req, res) => {
-  try {
-    const invoice = await Invoice.create(req.body);
-    res.json(invoice);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+  let result = await create.createOne(req,Model);
+  res.status(result.statusCode).json(result);
+
 });
 
-// Retrieve all invoices
+// Retrieve all items
 router.get('/', async (req, res) => {
-  try {
-    const invoices = await Invoice.findAll();
-    res.json(invoices);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  let result = await query.getAll(req,Model);
+  res.status(result.statusCode).json(result);
 });
 
-// Retrieve an invoice by ID
-router.get('/:id', getInvoice, (req, res) => {
-  res.json(res.invoice);
+// Retrieve a item by ID
+router.get('/:id', getItem, (req, res) => {
+  res.json(res.content);
 });
 
-// Update an invoice
-router.patch('/:id', getInvoice, async (req, res) => {
-  try {
-    await res.invoice.update(req.body);
-    res.json(res.invoice);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// Update a item
+router.patch('/:id', getItem, async (req, res) => {
+  const result = await update.updateItem(req,res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Delete an invoice
-router.delete('/:id', getInvoice, async (req, res) => {
-  try {
-    await res.invoice.destroy();
-    res.json({ message: 'Invoice deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Delete a item
+router.delete('/:id', getItem, async (req, res) => {
+  const result = await del.deleteItem(res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Middleware to get an invoice by ID
-async function getInvoice(req, res, next) {
-  try {
-    const invoice = await Invoice.findByPk(req.params.id);
-    if (!invoice) {
-      return res.status(404).json({ message: 'Invoice not found' });
-    }
-    res.invoice = invoice;
+// Middleware to get a item by ID
+async function getItem(req, res, next) {
+  const result = await query.getOneById(req,Model)
+  if (result.statusCode ==200){
+    res.item = result.data;
+    res.content = result;
     next();
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  }
+  else{
+    res.status(result.statusCode).json(result)
   }
 }
 

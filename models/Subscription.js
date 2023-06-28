@@ -7,6 +7,10 @@ const Subscription = sequelize.define('Subscription', {
   },
   user_id: {
     type: Sequelize.STRING,
+    references: {
+      model: 'users', 
+      key: 'id', 
+    }
   },
   plan_name: {
     type: Sequelize.ENUM('STANDARD', 'FREE','FREEMIUM','LIMITED'),

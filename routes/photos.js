@@ -1,66 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const Photo = require('../models').Photo;
-const sha256 = require('sha256');
-const bcrypt = require("bcrypt")
-const crypto = require("crypto")
+const Model = require('../models').Photo;
+const query = require('../interfaces/query/fetch');
+const create = require('../interfaces/command/create');
+const update = require('../interfaces/command/update');
+const del = require('../interfaces/command/delete');
 
-// Create a Photo
+// Create a Model
 router.post('/', async (req, res) => {
-  try {
-    const Photo = await Photo.create(req.body);
-    res.json(Photo);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+  let result = await create.createOne(req,Model);
+  res.status(result.statusCode).json(result);
+
 });
 
-// Retrieve all Photos
+// Retrieve all items
 router.get('/', async (req, res) => {
-  try {
-    const Photos = await Photo.findAll();
-    res.json(Photos);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  let result = await query.getAll(req,Model);
+  res.status(result.statusCode).json(result);
 });
 
-// Retrieve a Photo by ID
-router.get('/:id', getPhoto, (req, res) => {
-  res.json(res.Photo);
+// Retrieve a item by ID
+router.get('/:id', getItem, (req, res) => {
+  res.json(res.content);
 });
 
-// Update a Photo
-router.patch('/:id', getPhoto, async (req, res) => {
-  try {
-    await res.Photo.update(req.body);
-    res.json(res.Photo);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// Update a item
+router.patch('/:id', getItem, async (req, res) => {
+  const result = await update.updateItem(req,res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Delete a Photo
-router.delete('/:id', getPhoto, async (req, res) => {
-  try {
-    await res.Photo.destroy();
-    res.json({ message: 'Photo deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Delete a item
+router.delete('/:id', getItem, async (req, res) => {
+  const result = await del.deleteItem(res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Middleware to get a Photo by ID
-async function getPhoto(req, res, next) {
-  try {
-    const Photo = await Photo.findByPk(req.params.id);
-    if (!Photo) {
-      return res.status(404).json({ message: 'Photo not found' });
-    }
-    res.Photo = Photo;
+// Middleware to get a item by ID
+async function getItem(req, res, next) {
+  const result = await query.getOneById(req,Model)
+  if (result.statusCode ==200){
+    res.item = result.data;
+    res.content = result;
     next();
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  }
+  else{
+    res.status(result.statusCode).json(result)
   }
 }
 

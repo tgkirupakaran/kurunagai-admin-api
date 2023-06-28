@@ -5,7 +5,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
   operatorsAliases: false,
-  dialectOptions: dbConfig.dialectOptions,
+  // dialectOptions: dbConfig.dialectOptions,
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
@@ -19,10 +19,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.User = require('../models/User')(sequelize, Sequelize);
 db.Invoice = require('../models/Invoice')(sequelize, Sequelize);
 db.Payment = require('../models/Payment')(sequelize, Sequelize);
 db.Subscription = require('../models/Subscription')(sequelize, Sequelize);
-db.User = require('../models/User')(sequelize, Sequelize);
 db.Invite = require('../models/Invite')(sequelize, Sequelize);
+db.Photo = require('../models/Photo')(sequelize, Sequelize);
 
 module.exports = db;

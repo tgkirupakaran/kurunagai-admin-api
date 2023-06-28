@@ -76,8 +76,8 @@
               "name": "id",
               "description": "User ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -103,8 +103,8 @@
               "name": "id",
               "description": "User ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             },
             {
               "in": "body",
@@ -136,8 +136,8 @@
               "name": "id",
               "description": "User ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -212,8 +212,9 @@
               "name": "id",
               "description": "Invoice ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
+
             }
           ],
           "responses": {
@@ -239,8 +240,8 @@
               "name": "id",
               "description": "Invoice ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             },
             {
               "in": "body",
@@ -272,8 +273,8 @@
               "name": "id",
               "description": "Invoice ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -348,8 +349,8 @@
               "name": "id",
               "description": "Subscription ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -375,8 +376,8 @@
               "name": "id",
               "description": "Subscription ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             },
             {
               "in": "body",
@@ -408,8 +409,8 @@
               "name": "id",
               "description": "Subscription ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -484,8 +485,8 @@
               "name": "id",
               "description": "Payment ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -511,8 +512,8 @@
               "name": "id",
               "description": "Payment ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             },
             {
               "in": "body",
@@ -544,8 +545,8 @@
               "name": "id",
               "description": "Payment ID",
               "required": true,
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -611,7 +612,8 @@
               "in": "path",
               "description": "ID of the invite",
               "required": true,
-              "type": "integer"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -634,7 +636,8 @@
               "in": "path",
               "description": "ID of the invite",
               "required": true,
-              "type": "integer"
+              "type": "string",
+              "format": "uuid"
             },
             {
               "in": "body",
@@ -666,7 +669,8 @@
               "in": "path",
               "description": "ID of the invite",
               "required": true,
-              "type": "integer"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {
@@ -732,8 +736,8 @@
               "in": "path",
               "description": "ID of the photo",
               "required": true,
-              "type": "integer"
-            }
+              "type": "string",
+              "format": "uuid"            }
           ],
           "responses": {
             "200": {
@@ -755,7 +759,8 @@
               "in": "path",
               "description": "ID of the photo",
               "required": true,
-              "type": "integer"
+              "type": "string",
+              "format": "uuid"
             },
             {
               "in": "body",
@@ -787,7 +792,8 @@
               "in": "path",
               "description": "ID of the photo",
               "required": true,
-              "type": "integer"
+              "type": "string",
+              "format": "uuid"
             }
           ],
           "responses": {

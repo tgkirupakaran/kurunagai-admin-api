@@ -6,7 +6,14 @@ const Payment = sequelize.define('Payment', {
     defaultValue: Sequelize.UUIDV4
   },
   invoice_id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
+    references: {
+      model: 'invoices', 
+      key: 'id', 
+    }
+  },
+  bank_ref: {
+    type: Sequelize.STRING,
   },
   amount: {
     type: Sequelize.DECIMAL(10, 2),
@@ -18,7 +25,6 @@ const Payment = sequelize.define('Payment', {
   status: {
     type: Sequelize.ENUM('COMPLETE','INCOMPLETE'),
   }
-
 
 });
 
