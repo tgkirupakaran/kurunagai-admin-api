@@ -8,6 +8,10 @@ const Photo = sequelize.define('Photo', {
   user_id: {
     type: Sequelize.STRING,
     allowNull: false,
+    references: {
+      model: 'users', 
+      key: 'id', 
+    }
   },
   title: {
     type: Sequelize.STRING,

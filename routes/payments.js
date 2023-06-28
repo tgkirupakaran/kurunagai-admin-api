@@ -1,63 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const Payment = require('../models').Payment;
+const Model = require('../models').Payment;
+const query = require('../interfaces/query/fetch');
+const create = require('../interfaces/command/create');
+const update = require('../interfaces/command/update');
+const del = require('../interfaces/command/delete');
 
-// Create a payment
+// Create a Model
 router.post('/', async (req, res) => {
-  try {
-    const payment = await Payment.create(req.body);
-    res.json(payment);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+  let result = await create.createOne(req,Model);
+  res.status(result.statusCode).json(result);
+
 });
 
-// Retrieve all payments
+// Retrieve all items
 router.get('/', async (req, res) => {
-  try {
-    const payments = await Payment.findAll();
-    res.json(payments);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  let result = await query.getAll(req,Model);
+  res.status(result.statusCode).json(result);
 });
 
-// Retrieve a payment by ID
-router.get('/:id', getPayment, (req, res) => {
-  res.json(res.payment);
+// Retrieve a item by ID
+router.get('/:id', getItem, (req, res) => {
+  res.json(res.content);
 });
 
-// Update a payment
-router.patch('/:id', getPayment, async (req, res) => {
-  try {
-    await res.payment.update(req.body);
-    res.json(res.payment);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// Update a item
+router.patch('/:id', getItem, async (req, res) => {
+  const result = await update.updateItem(req,res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Delete a payment
-router.delete('/:id', getPayment, async (req, res) => {
-  try {
-    await res.payment.destroy();
-    res.json({ message: 'Payment deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+// Delete a item
+router.delete('/:id', getItem, async (req, res) => {
+  const result = await del.deleteItem(res.item)
+  res.status(result.statusCode).json(result);
 });
 
-// Middleware to get a payment by ID
-async function getPayment(req, res, next) {
-  try {
-    const payment = await Payment.findByPk(req.params.id);
-    if (!payment) {
-      return res.status(404).json({ message: 'Payment not found' });
-    }
-    res.payment = payment;
+// Middleware to get a item by ID
+async function getItem(req, res, next) {
+  const result = await query.getOneById(req,Model)
+  if (result.statusCode ==200){
+    res.item = result.data;
+    res.content = result;
     next();
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  }
+  else{
+    res.status(result.statusCode).json(result)
   }
 }
 

@@ -17,6 +17,29 @@
           "User"
         ],
         "summary": "Get all users",
+        
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -53,7 +76,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
                 }
@@ -77,8 +100,8 @@
             "description": "User ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -95,7 +118,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "User"
         ],
@@ -107,8 +130,8 @@
             "description": "User ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -127,7 +150,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/User"
                 }
@@ -149,8 +172,8 @@
             "description": "User ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -168,6 +191,28 @@
           "Invoice"
         ],
         "summary": "Get all invoices",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -204,7 +249,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Invoice"
                 }
@@ -228,8 +273,8 @@
             "description": "Invoice ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -246,7 +291,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Invoice"
         ],
@@ -258,8 +303,8 @@
             "description": "Invoice ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -278,7 +323,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Invoice"
                 }
@@ -300,8 +345,8 @@
             "description": "Invoice ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -319,6 +364,28 @@
           "Subscription"
         ],
         "summary": "Get all subscriptions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -355,7 +422,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Subscription"
                 }
@@ -379,8 +446,8 @@
             "description": "Subscription ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -397,7 +464,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Subscription"
         ],
@@ -409,8 +476,8 @@
             "description": "Subscription ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -429,7 +496,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Subscription"
                 }
@@ -451,8 +518,8 @@
             "description": "Subscription ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -470,6 +537,28 @@
           "Payment"
         ],
         "summary": "Get all payments",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -506,7 +595,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Payment"
                 }
@@ -530,8 +619,8 @@
             "description": "Payment ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -548,7 +637,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Payment"
         ],
@@ -560,8 +649,8 @@
             "description": "Payment ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -580,7 +669,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Payment"
                 }
@@ -602,8 +691,8 @@
             "description": "Payment ID",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -621,11 +710,33 @@
           "Invite"
         ],
         "summary": "Get all invites",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -645,7 +756,7 @@
         "requestBody": {
           "description": "Invite object that needs to be created",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Invite"
               }
@@ -657,7 +768,7 @@
           "201": {
             "description": "Created",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Invite"
                 }
@@ -681,7 +792,8 @@
             "description": "ID of the invite",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -689,7 +801,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Invite"
                 }
@@ -698,7 +810,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Invite"
         ],
@@ -710,14 +822,15 @@
             "description": "ID of the invite",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
         "requestBody": {
           "description": "Invite object that needs to be updated",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Invite"
               }
@@ -729,7 +842,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Invite"
                 }
@@ -751,7 +864,8 @@
             "description": "ID of the invite",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -763,17 +877,73 @@
         }
       }
     },
+    "/invites/verify/{id}": {
+      "get": {
+        "tags": [
+          "Invite"
+        ],
+        "summary": "Email ID verification api",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "invite id",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/photos": {
       "get": {
         "tags": [
           "Photo"
         ],
         "summary": "Get all photos",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -793,7 +963,7 @@
         "requestBody": {
           "description": "Photo object that needs to be created",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Photo"
               }
@@ -805,7 +975,7 @@
           "201": {
             "description": "Created",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Photo"
                 }
@@ -829,7 +999,8 @@
             "description": "ID of the photo",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -837,7 +1008,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Photo"
                 }
@@ -846,7 +1017,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Photo"
         ],
@@ -858,14 +1029,15 @@
             "description": "ID of the photo",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
         "requestBody": {
           "description": "Photo object that needs to be updated",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Photo"
               }
@@ -877,7 +1049,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Photo"
                 }
@@ -899,7 +1071,8 @@
             "description": "ID of the photo",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4"
             }
           }
         ],
@@ -918,7 +1091,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuidv4"
           },
           "username": {
             "type": "string"
@@ -930,7 +1104,8 @@
             "type": "string"
           },
           "email": {
-            "type": "string"
+            "type": "string",
+            "format": "email"
           },
           "password": {
             "type": "string"
@@ -968,7 +1143,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuidv4"
           },
           "user_id": {
             "type": "string"
@@ -1006,7 +1182,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuidv4"
           },
           "user_id": {
             "type": "string"
@@ -1033,7 +1210,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuidv4"
           },
           "invoice_id": {
             "type": "integer",
@@ -1060,7 +1238,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuidv4"
           },
           "user_id": {
             "type": "string"
@@ -1096,9 +1275,17 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuidv4"
           },
           "user_id": {
+            "type": "string"
+          },
+          "email_id": {
+            "type": "string",
+            "format": "email"
+          },
+          "description": {
             "type": "string"
           },
           "role": {
@@ -1125,6 +1312,34 @@
               "VERIFIED",
               "EXPIRED"
             ]
+          }
+        }
+      },
+      "GenericResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "succeded": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "GenericErrorResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer"
+          },
+          "succeded": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
           }
         }
       }
