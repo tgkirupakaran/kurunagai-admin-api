@@ -7,10 +7,10 @@ const Payment = sequelize.define('Payment', {
   },
   invoice_id: {
     type: Sequelize.STRING,
-    references: {
-      model: 'invoices', 
-      key: 'id', 
-    }
+    // references: {
+    //   model: 'invoices', 
+    //   key: 'id', 
+    // }
   },
   bank_ref: {
     type: Sequelize.STRING,
