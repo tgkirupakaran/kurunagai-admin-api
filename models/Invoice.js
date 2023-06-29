@@ -7,10 +7,10 @@ const Invoice = sequelize.define('Invoice', {
   },
   user_id: {
     type: Sequelize.STRING,
-    references: {
-      model: 'users', 
-      key: 'id', 
-    } 
+    // references: {
+    //   model: 'users', 
+    //   key: 'id', 
+    // } 
   },
   amount: {
     type: Sequelize.DECIMAL(10, 2),

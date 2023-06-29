@@ -8,10 +8,10 @@ module.exports = (sequelize, Sequelize) => {
       user_id: {
         type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: 'users', 
-          key: 'id', 
-       }
+      //   references: {
+      //     model: 'users', 
+      //     key: 'id', 
+      //  }
       },
       email_id: {
         type: Sequelize.STRING,
