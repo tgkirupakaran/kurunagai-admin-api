@@ -20,6 +20,7 @@ jobs:
           echo PLANET_SOURCE_DB_USER=${{ vars.PLANET_SOURCE_DB_USER }} >> .env
           echo PLANET_SOURCE_DB_PASSWORD=${{ secrets.PLANET_SOURCE_DB_PASSWORD }} >> .env
           echo PLANET_SOURCE_DB_NAME=${{ vars.PLANET_SOURCE_DB_NAME }} >> .env
+          echo PORT=${{ vars.PORT }} >> .env
           cat .env
 
       - name: Log in to Docker Hub
