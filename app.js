@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const swStats = require('swagger-stats');
 const expressWinston = require('express-winston');
 const winston = require('winston'); 
+require('newrelic');
 
 // Project imports
 const swaggerDocument = require('./openapi.json');
