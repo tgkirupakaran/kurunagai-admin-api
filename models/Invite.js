@@ -13,6 +13,14 @@ module.exports = (sequelize, Sequelize) => {
       //     key: 'id', 
       //  }
       },
+      invited_by: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      //   references: {
+      //     model: 'users', 
+      //     key: 'id', 
+      //  }
+      },
       email_id: {
         type: Sequelize.STRING,
         allowNull: false,

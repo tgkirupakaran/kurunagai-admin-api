@@ -4,7 +4,6 @@ const swaggerUi = require('swagger-ui-express');
 const swStats = require('swagger-stats');
 const expressWinston = require('express-winston');
 const winston = require('winston'); 
-require('newrelic');
 
 // Project imports
 const swaggerDocument = require('./openapi.json');
@@ -16,8 +15,8 @@ app.use(express.json());
 
 // DB Migrations
 const db = require("./models");
-db.sequelize.sync({force:true})
-// db.sequelize.sync()
+// db.sequelize.sync({force:true})
+db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
   })
@@ -72,5 +71,5 @@ app.use(expressWinston.errorLogger({
 
 // Start App
 app.listen(process.env.PORT || 3000, () => {
-  console.log('Server is running on port 3000');
+  console.log('Server is running on port ' + process.env.PORT || '3000' );
 });
