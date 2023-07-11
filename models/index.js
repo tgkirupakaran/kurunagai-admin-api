@@ -25,5 +25,6 @@ db.Payment = require('../models/Payment')(sequelize, Sequelize);
 db.Subscription = require('../models/Subscription')(sequelize, Sequelize);
 db.Invite = require('../models/Invite')(sequelize, Sequelize);
 db.Photo = require('../models/Photo')(sequelize, Sequelize);
+db.XrefPhotoAlbum = require('../models/XrefPhotoAlbum')(sequelize, Sequelize);
 
 module.exports = db;
