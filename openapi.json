@@ -123,6 +123,38 @@
         "x-codegen-request-body-name": "user"
       }
     },
+    "/upload":{
+      "post": {
+        "tags": [
+          "Upload"
+        ],
+        "summary": "Upload a file",
+        "requestBody": {
+          "description": "User object",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "user"
+      }
+    },
     "/users": {
       "get": {
         "tags": [

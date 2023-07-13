@@ -6,8 +6,8 @@ const verifyJWT = (req, res, next) => {
     if (!authHeader) {
        return res.status(401).json({
             statusCode: 401,
-            succeded: true,
-            data: {message: 'Unauthorized access.'} ,
+            succeded: false,
+            message: 'Unauthorized access.' ,
         });
     }
     const token = authHeader.split(' ')[1];
@@ -17,8 +17,8 @@ const verifyJWT = (req, res, next) => {
         (err, decoded) => {
             if (err) return res.status(403).json({
                 statusCode: 401,
-                succeded: true,
-                data: {message: 'Invalid access token'} ,
+                succeded: false,
+                message: 'Invalid access token' ,
             });
             req.user = decoded
             next()

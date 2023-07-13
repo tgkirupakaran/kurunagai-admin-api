@@ -1,7 +1,8 @@
 node_modules
 npm-debug.log
-.env
+.env*
 .github
 .gitignore
 test
-Docerfile
+Dockerfile
+storage*

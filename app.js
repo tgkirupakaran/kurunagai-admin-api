@@ -69,7 +69,7 @@ app.use(swStats.getMiddleware({swaggerSpec:swaggerDocument}));
 
 // Serve Root
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Kurunagai API." });
+  res.json({ message: 'Welcome to Kurunagai API.', docs:'/api-docs',stats:'/swagger-stats' });
 });
 
 
@@ -95,6 +95,7 @@ app.use('/api/payments', require('./routes/payments.routes'));
 app.use('/api/invoices', require('./routes/invoices.routes'));
 app.use('/api/invites', require('./routes/invites.routes'));
 app.use('/api/photos', require('./routes/photos.routes'));
+app.use('/api/upload', require('./routes/upload.routes'));
 
 
 // Setup error Logger

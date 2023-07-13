@@ -11,6 +11,7 @@ const googleAuthSuccess = (async (req, res) => {
             email: req.user._json.email,
             google_id: req.user._json.sub
         }
+        console.log('google id: '+req.user._json.sub)
         const usrResp = await query.countItemsByFilter(userModel, filter)
         if(usrResp.data.found){
             const userObj={
@@ -21,7 +22,7 @@ const googleAuthSuccess = (async (req, res) => {
                 picture: req.user._json.picture
             }
             const accessToken = jwt.sign(userObj,process.env.ACCESS_TOKET_SECRET,{expiresIn: '15m'})
-            const refreshToken = jwt.sign(userObj,process.env.REFRESH_TOKET_SECRET,{expiresIn: '1d'})
+            const refreshToken = jwt.sign(userObj,process.env.REFRESH_TOKEN_SECRET,{expiresIn: '1d'})
 
             res.cookie('jwt',refreshToken,{httpOnly: true,maxAge: 24*60*60*1000})
             res.status(200).json({
