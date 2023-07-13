@@ -1,7 +1,7 @@
-const create = require('../interfaces/command/create');
-const query = require('../interfaces/query/fetch');
-const update = require('../interfaces/command/update');
-const del = require('../interfaces/command/delete');
+const create = require('../interfaces/db/command/create');
+const query = require('../interfaces/db/query/fetch');
+const update = require('../interfaces/db/command/update');
+const del = require('../interfaces/db/command/delete');
 
 const postItem = (async (req, res) => {
     create.createOne(req,res.model)
@@ -35,7 +35,12 @@ const getById = (async (req, res) => {
     res.json(res.content);
 })
 
-
+const getByFilter =(async (req, res) => {
+    query.getByFilter(req, res.model, res.filter)
+    .then((result)=>{
+        sendResponse(res,result);
+    });
+})
 
 // Middleware to get a item by ID
 const getItem = async (req, res, next) => {
@@ -61,5 +66,6 @@ module.exports = {
     deleteItem,
     getAll,
     getById,
-    getItem
+    getItem,
+    getByFilter
 }

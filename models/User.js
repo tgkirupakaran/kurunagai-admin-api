@@ -5,11 +5,6 @@ const User = sequelize.define('User', {
     primaryKey: true,
     defaultValue: Sequelize.UUIDV4
   },
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
   firstname:{
     type: Sequelize.STRING,
   },
@@ -26,12 +21,15 @@ const User = sequelize.define('User', {
   },
   google_id: {
     type: Sequelize.STRING,
+    unique: true,
   },
   apple_id: {
     type: Sequelize.STRING,
+    unique: true,
   },
   microsoft_id: {
     type: Sequelize.STRING,
+    unique: true,
   },
   role: {
     type: Sequelize.ENUM('CUSTOMER', 'ADMIN','SUPERADMIN','EXECUTIVEBOARDMEMBER'),
@@ -41,11 +39,11 @@ const User = sequelize.define('User', {
     // 'EXECUTIVEBOARDMEMBER' - GOD MODE Full Access to Database, Storage, Infrastructure and Application
   },
   status: {
-    type: Sequelize.ENUM('ACTIVE', 'INVITED','DISABLED','INACTIVE'),
+    type: Sequelize.ENUM('ACTIVE', 'INVITED','DISABLED','INACTIVE','NEW'),  
     allowNull: false,
-    defaultValue: 'INVITED'
+    defaultValue: 'NEW'
   }
 });
 
 return User;
-}
+} 

@@ -19,9 +19,6 @@ const Photo = sequelize.define('Photo', {
   thumbnail: {
     type: Sequelize.BLOB,
   },
-  album_id: {
-    type: Sequelize.STRING,
-  },
   captured_by: {
     type: Sequelize.STRING,
   },

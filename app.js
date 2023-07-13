@@ -1,22 +1,51 @@
-// System/ Thirs Party imports
+// System/ Third Party imports
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swStats = require('swagger-stats');
 const expressWinston = require('express-winston');
 const winston = require('winston'); 
+const passport = require('passport')
+const cookieSession = require("cookie-session");
+const cors = require("cors");
+
+require('dotenv').config()
 
 // Project imports
 const swaggerDocument = require('./openapi.json');
+const passportSetup = require('./passport')
+const verifyJWT = require('./middleware/verifyJWT')
 
 // Express setup
 const app = express();
 app.use(express.json());
 
+// Settingup session cookies
+app.use(
+	cookieSession({
+		name: "session",
+		keys: ["cyberwolve"],
+		maxAge: 24 * 60 * 60 * 100,
+	})
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// CORS for UI
+app.use(
+	cors(
+    {
+    origin: process.env.CLIENT_URL,
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+    }
+  )
+);
 
 // DB Migrations
 const db = require("./models");
-// db.sequelize.sync({force:true})
-db.sequelize.sync()
+db.sequelize.sync({force:true})
+// db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
   })
@@ -40,7 +69,7 @@ app.use(swStats.getMiddleware({swaggerSpec:swaggerDocument}));
 
 // Serve Root
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Kurunagai API." });
+  res.json({ message: 'Welcome to Kurunagai API.', docs:'/api-docs',stats:'/swagger-stats' });
 });
 
 
@@ -51,12 +80,23 @@ app.get("/api-docs/swagger.json", (req, res) => {
 // Serve Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Serve API
-app.use('/api/users', require('./routes/users'));
-app.use('/api/subscriptions', require('./routes/subscriptions'));
-app.use('/api/payments', require('./routes/payments'));
-app.use('/api/invoices', require('./routes/invoices'));
-app.use('/api/invites', require('./routes/invites'));
+// Registration and Auth API
+app.use('/api/register', require('./routes/register.routes'));
+app.use('/api/google/auth', require('./routes/google.auth.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
+
+// Protectect API
+app.use(verifyJWT)
+
+// Protected APIs
+app.use('/api/users', require('./routes/users.routes'));
+app.use('/api/subscriptions', require('./routes/subscriptions.routes'));
+app.use('/api/payments', require('./routes/payments.routes'));
+app.use('/api/invoices', require('./routes/invoices.routes'));
+app.use('/api/invites', require('./routes/invites.routes'));
+app.use('/api/photos', require('./routes/photos.routes'));
+app.use('/api/upload', require('./routes/upload.routes'));
+
 
 // Setup error Logger
 app.use(expressWinston.errorLogger({
@@ -70,6 +110,6 @@ app.use(expressWinston.errorLogger({
 }));
 
 // Start App
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server is running on port ' + process.env.PORT || '3000' );
+app.listen(process.env.PORT || 8080, () => {
+  console.log('Server is running on port ' + process.env.PORT || '8080' );
 });
