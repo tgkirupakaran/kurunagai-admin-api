@@ -5,7 +5,7 @@ const redisOptions={
     port: process.env.REDIS_PORT,
     username: process.env.REDIS_USER,
     password: process.env.REDIS_PASSWORD,
-    ssl: true
+    tls: {}
 }
 
 module.exports = redisOptions
