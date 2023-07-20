@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/auth/google": {
+    "/google/auth/google": {
       "get": {
         "tags": [
           "Authentication"
@@ -31,7 +31,7 @@
         }
       }
     },
-    "/auth/google/callback": {
+    "/google/auth/callback": {
       "get": {
         "tags": [
           "Authentication"
@@ -51,7 +51,7 @@
         }
       }
     },
-    "/auth/login/success": {
+    "/google/auth/login/success": {
       "get": {
         "tags": [
           "Authentication"
@@ -71,7 +71,7 @@
         }
       }
     },
-    "/auth/login/failed": {
+    "/google/auth/login/failed": {
       "get": {
         "tags": [
           "Authentication"
@@ -84,6 +84,57 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GenericErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/google/auth/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Google Auth API",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Kurunagai Auth API",
+        "requestBody": {
+          "description": "User object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericResponse"
                 }
               }
             }
@@ -125,6 +176,7 @@
     },
     "/upload":{
       "post": {
+        "security":[{"bearerAuth":[]}],
         "tags": [
           "Upload"
         ],
@@ -161,7 +213,7 @@
           "User"
         ],
         "summary": "Get all users",
-        
+        "security":[{"bearerAuth":[]}],
         "parameters": [
           {
             "name": "page",
@@ -1501,6 +1553,24 @@
             "type": "string"
           }
         }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes":{
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

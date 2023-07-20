@@ -30,9 +30,10 @@ async function getAll(req ,model) {
 
         response.data.items = items.rows;
     } catch (err) {
-        response.statusCode = 500;
-        response.succeded = false;
-        response.message = err.message;
+        response = getErrorResponse(500,false,err.message)
+        // response.statusCode = 500;
+        // response.succeded = false;
+        // response.message = err.message;
     }
     return response;
 }
@@ -42,18 +43,20 @@ async function getOneById(req ,model) {
     try {
         const item = await model.findByPk(req.params.id);
         if (!item) {
-            response.statusCode = 404;
-            response.succeded = false;
-            response.message = 'Item not found for key ' + req.params.id;
-            return response;
+            response = getErrorResponse(404,false,'Item not found for key ' + req.params.id)
+            // response.statusCode = 404;
+            // response.succeded = false;
+            // response.message = 'Item not found for key ' + req.params.id;
+            // return response;
         }
         else{
             response.data = item;
         }
     } catch (err) {
-        response.statusCode = 500;
-        response.succeded = false;
-        response.message = err.message;
+        response = getErrorResponse(500,false,err.message)
+        // response.statusCode = 500;
+        // response.succeded = false;
+        // response.message = err.message;
     }
     return response
 }
@@ -90,9 +93,10 @@ async function getByFilter(req ,model, filter) {
 
         response.data.items = items.rows;
     } catch (err) {
-        response.statusCode = 500;
-        response.succeded = false;
-        response.message = err.message;
+        response = getErrorResponse(500,false,err.message)
+        // response.statusCode = 500;
+        // response.succeded = false;
+        // response.message = err.message;
     }
     return response;
 }
@@ -108,11 +112,16 @@ async function countItemsByFilter(model, filter) {
         response.data.noOfItems = items.count
         response.data.items = items
     } catch (err) {
-        response.statusCode = 500;
-        response.succeded = false;
-        response.message = err.message;
+        response = getErrorResponse(500,false,err.message)
+        // response.statusCode = 500;
+        // response.succeded = false;
+        // response.message = err.message;
     }
     return response;
+}
+
+function getErrorResponse(statusCode,succeded,message){
+    return {statusCode, succeded, message}
 }
 
 module.exports.getAll = getAll;

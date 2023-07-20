@@ -7,17 +7,57 @@ const winston = require('winston');
 const passport = require('passport')
 const cookieSession = require("cookie-session");
 const cors = require("cors");
+const { createBullBoard } = require('@bull-board/api');
+const { ExpressAdapter } = require('@bull-board/express');
+const { BullMQAdapter } = require('@bull-board/api/bullMQAdapter');
 
+const passportSetup = require('./passport')
 require('dotenv').config()
 
 // Project imports
 const swaggerDocument = require('./openapi.json');
-const passportSetup = require('./passport')
 const verifyJWT = require('./middleware/verifyJWT')
+const setupMQ = require('./interfaces/jobs/command/createMQ')
 
 // Express setup
 const app = express();
 app.use(express.json());
+
+// CORS for UI
+app.use(
+	cors(
+    {
+    origin: process.env.CLIENT_URL,
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+    }
+  )
+);
+
+// CORS middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
+  next();
+});
+
+// Setting up bull-board
+const serverAdapter = new ExpressAdapter();
+serverAdapter.setBasePath('/bull-board');
+
+const mqs = setupMQ()
+
+let bMQAdapters = []
+for(let key in mqs){
+  bMQAdapters.push(new BullMQAdapter(mqs[key]))
+}
+
+
+createBullBoard({
+  queues: bMQAdapters,
+  serverAdapter,
+});
+
+app.use('/bull-board', serverAdapter.getRouter());
 
 // Settingup session cookies
 app.use(
@@ -33,16 +73,7 @@ app.enable("trust proxy");
 app.use(passport.initialize());
 app.use(passport.session());
 
-// CORS for UI
-app.use(
-	cors(
-    {
-    origin: process.env.CLIENT_URL,
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-    }
-  )
-);
+
 
 // DB Migrations
 const db = require("./models");
