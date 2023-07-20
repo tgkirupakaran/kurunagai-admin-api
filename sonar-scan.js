@@ -12,3 +12,5 @@ scanner(
   },
   () => process.exit()
 )
+
+// Sonar token 93affe23a4b45d18cf1c6284b0e8e9d131e9d6dc

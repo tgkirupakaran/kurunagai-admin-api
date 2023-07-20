@@ -9,7 +9,7 @@ const googleAuthSuccess = (async (req, res) => {
     if (req.user) {
         const filter = {
             email: req.user._json.email,
-            google_id: req.user._json.sub
+            // google_id: req.user._json.sub
         }
         console.log('google id: '+req.user._json.sub)
         const usrResp = await query.countItemsByFilter(userModel, filter)
