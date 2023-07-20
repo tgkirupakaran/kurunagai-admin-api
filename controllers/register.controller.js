@@ -6,8 +6,11 @@ const bcrypt = require('bcrypt')
 const customerSignUp =  (async (req, res) => {
     req.body.role = 'CUSTOMER'
     req.body.status = 'NEW'
-    const hashedPasswd = await bcrypt.hash(req.body.password,5)
-    req.body.password = hashedPasswd
+    if(req.body.password){
+        const hashedPasswd = await bcrypt.hash(req.body.password,5)
+        req.body.password = hashedPasswd
+    }
+    
     const filter = {
         email: req.body.email
     }

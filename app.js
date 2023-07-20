@@ -24,21 +24,22 @@ const app = express();
 app.use(express.json());
 
 // CORS for UI
-app.use(
-	cors(
-    {
-    origin: process.env.CLIENT_URL,
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-    }
-  )
-);
+app.use(cors())
+// app.use(
+// 	cors(
+//     {
+//     origin: process.env.CLIENT_URL,
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+//     }
+//   )
+// );
 
 // CORS middleware
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
+//   next();
+// });
 
 // Setting up bull-board
 const serverAdapter = new ExpressAdapter();

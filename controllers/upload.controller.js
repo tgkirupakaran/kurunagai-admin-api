@@ -4,9 +4,8 @@ const redisOptions = require('../config/redisConfig')
 const uploadFiles = (async (req, res) => {
     if (req.file){
         console.log(req.file)
-        const unqId = Date.now()
         const flowProducer = new FlowProducer({connection:redisOptions})
-        const flow = await flowProducer.add({
+        await flowProducer.add({
             name: 'upload-job',
             queueName: 'upload-jobs',
             data: {ecryptedfilename:'dummy name',filepath:'dummypath'},
