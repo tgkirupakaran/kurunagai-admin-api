@@ -28,7 +28,7 @@ app.use(cors())
 app.use(
 	cors(
     {
-    origin: process.env.CLIENT_URL,
+    origin: '*',
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
     }
@@ -37,7 +37,7 @@ app.use(
 
 // CORS middleware
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
+  res.header('Access-Control-Allow-Origin', '*'); // Compliant
   next();
 });
 
