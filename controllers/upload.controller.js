@@ -4,6 +4,7 @@ const redisOptions = require('../config/redisConfig')
 const uploadFiles = (async (req, res) => {
     if (req.file){
         console.log(req.file)
+        console.log(req.body)
         const flowProducer = new FlowProducer({connection:redisOptions})
         await flowProducer.add({
             name: 'upload-job',
@@ -12,7 +13,7 @@ const uploadFiles = (async (req, res) => {
             children: [
               { 
                 name: 'encrypt-job', 
-                data: {filename:'dummy name',ecryptedfilename:'dummy name',filepath:'dummypath'}, 
+                data: {filename:req.file.filename ,ecryptedfilename:'crypt-'+req.file.filename ,downloadUri:'/tempfiles/'+ req.file.filename}, 
                 queueName: 'upload-jobs'
               },
               { 

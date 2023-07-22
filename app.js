@@ -25,21 +25,21 @@ app.use(express.json());
 
 // CORS for UI
 app.use(cors())
-// app.use(
-// 	cors(
-//     {
-//     origin: process.env.CLIENT_URL,
-//     methods: "GET,POST,PUT,DELETE",
-//     credentials: true,
-//     }
-//   )
-// );
+app.use(
+	cors(
+    {
+    origin: process.env.CLIENT_URL,
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+    }
+  )
+);
 
 // CORS middleware
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
-//   next();
-// });
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
+  next();
+});
 
 // Setting up bull-board
 const serverAdapter = new ExpressAdapter();
@@ -103,7 +103,7 @@ app.use(swStats.getMiddleware({swaggerSpec:swaggerDocument}));
 
 // Serve Root
 app.get("/", (req, res) => {
-  res.json({ message: 'Welcome to Kurunagai API.', docs:'/api-docs',stats:'/swagger-stats' });
+  res.json({ message: 'Welcome to Kurunagai API.', docs:'/api-docs',stats:'/swagger-stats', batchJobs:'/bull-board' });
 });
 
 
@@ -118,6 +118,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/register', require('./routes/register.routes'));
 app.use('/api/google/auth', require('./routes/google.auth.routes'));
 app.use('/api/auth', require('./routes/auth.routes'));
+
+//Serve tempfiles for batch job
+app.use('/tempfiles', express.static('./storage/uploads'));
 
 // Protectect API
 app.use(verifyJWT)
