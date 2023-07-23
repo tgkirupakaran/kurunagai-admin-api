@@ -6,8 +6,7 @@ function setupMQ () {
     const registrationQueue = createQueueMQ('registration-jobs');
     const sendEmailQueue = createQueueMQ('send-email-jobs');
     const uploadQueue = createQueueMQ('upload-jobs');
-    const encryptQueue = createQueueMQ('encrypt-file-jobs');
-    return { registrationQueue, uploadQueue, encryptQueue, sendEmailQueue }
+    return { registrationQueue, uploadQueue, sendEmailQueue }
 }
 
 module.exports = setupMQ

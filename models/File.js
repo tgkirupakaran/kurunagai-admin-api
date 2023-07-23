@@ -30,25 +30,8 @@ const Photo = sequelize.define('Photo', {
   },
   status: {
     type: Sequelize.ENUM('INTEMP', 'ENCRYPTEDINTEMP','UPLOADED','PINNED','FINAL','FORDELETE','DELETED'),
-  },
-  thumbnail: {
-    type: Sequelize.BLOB,
-  },
-  captured_by: {
-    type: Sequelize.STRING,
-  },
-  captured_on: {
-    type: Sequelize.DATE,
-  },
-  captured_at: {
-    type: Sequelize.STRING,
-  },
-  resolution:{
-    type: Sequelize.STRING,
-  },
-  other_meta_data: {
-    type: Sequelize.STRING,
-  },
+  }
+
 
 });
 

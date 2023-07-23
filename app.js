@@ -78,8 +78,8 @@ app.use(passport.session());
 
 // DB Migrations
 const db = require("./models");
-// db.sequelize.sync({force:true})
-db.sequelize.sync()
+db.sequelize.sync({force:true})
+// db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
   })
