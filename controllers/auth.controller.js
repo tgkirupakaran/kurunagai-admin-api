@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt =require('jsonwebtoken')
 const query = require('../interfaces/db/query/fetch');
 const userModel = require('../models').User;
-const sessionModel = require('../models/UserSessions').UserSession
+const sessionModel = require('../models/UserSession').UserSession
 
 const googleAuthSuccess = (async (req, res) => {
     if (req.user) {
@@ -107,7 +107,6 @@ function sendUnauthorized(res,message){
         message: message ,
     });
 }
-
 
 module.exports = { 
     googleLogout,

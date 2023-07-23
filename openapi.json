@@ -381,11 +381,185 @@
         }
       }
     },
+    "/sms":{
+      "get": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Get all SMS",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page Number starting from 1. Default 1",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items. Default 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SMS"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Create a new SMS",
+        "requestBody": {
+          "description": "SMS object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMS"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMS"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "sms"
+      }
+    },
+    "/sms/{id}": {
+      "get": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Get an sms by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SMS ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMS"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Update an sms by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SMS ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated SMS object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMS"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMS"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "SMS"
+      },
+      "delete": {
+        "tags": [
+          "SMS"
+        ],
+        "summary": "Delete an SMS by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "SMS ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "content": {}
+          }
+        }
+      }
+    },
     "/invoices": {
       "get": {
         "tags": [
           "Invoice"
         ],
+        "security":[{"bearerAuth":[]}],
         "summary": "Get all invoices",
         "parameters": [
           {
@@ -1348,6 +1522,27 @@
             "type": "string"
           }
          
+        }
+      },
+      "SMS": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuidv4"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "receivedat": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
         }
       },
       "Invoice": {

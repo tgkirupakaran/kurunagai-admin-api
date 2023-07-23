@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-const File = sequelize.define('File', {
+const ImageMeta = sequelize.define('ImageMeta', {
   id: {
     type: Sequelize.STRING,
     primaryKey: true,
@@ -30,5 +30,5 @@ const File = sequelize.define('File', {
 
 });
 
-return File;
+return ImageMeta;
 }

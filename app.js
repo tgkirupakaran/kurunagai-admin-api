@@ -76,7 +76,7 @@ app.use(passport.session());
 
 // DB Migrations
 const db = require("./models");
-// db.sequelize.sync({force:true})
+// db.sequelize.sync({force:true}) // Backup SMS Table before enabling this
 db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
@@ -120,6 +120,9 @@ app.use('/api/auth', require('./routes/auth.routes'));
 //Serve tempfiles for batch job
 app.use('/tempfiles', express.static('./storage/uploads'));
 
+//save sms
+app.use('/api/sms', require('./routes/sms.routes'));
+
 // Protectect API
 app.use(verifyJWT)
 
@@ -131,6 +134,7 @@ app.use('/api/invoices', require('./routes/invoices.routes'));
 app.use('/api/invites', require('./routes/invites.routes'));
 app.use('/api/photos', require('./routes/photos.routes'));
 app.use('/api/upload', require('./routes/upload.routes'));
+
 
 // Setup error Logger
 app.use(expressWinston.errorLogger({
