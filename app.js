@@ -28,7 +28,7 @@ app.use(cors())
 app.use(
 	cors(
     {
-    origin: '*',
+    origin: process.env.CLIENT_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
     }
@@ -37,7 +37,7 @@ app.use(
 
 // CORS middleware
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Compliant
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL); // Compliant
   next();
 });
 
@@ -74,12 +74,10 @@ app.enable("trust proxy");
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 // DB Migrations
 const db = require("./models");
-db.sequelize.sync({force:true})
-// db.sequelize.sync()
+// db.sequelize.sync({force:true})
+db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
   })
@@ -133,7 +131,6 @@ app.use('/api/invoices', require('./routes/invoices.routes'));
 app.use('/api/invites', require('./routes/invites.routes'));
 app.use('/api/photos', require('./routes/photos.routes'));
 app.use('/api/upload', require('./routes/upload.routes'));
-
 
 // Setup error Logger
 app.use(expressWinston.errorLogger({
