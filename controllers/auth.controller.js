@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt =require('jsonwebtoken')
 const query = require('../interfaces/db/query/fetch');
 const userModel = require('../models').User;
-const sessionModel = require('../models/UserSessions').UserSession
+const sessionModel = require('../models/UserSession').UserSession
 
 const googleAuthSuccess = (async (req, res) => {
     if (req.user) {
@@ -86,12 +86,12 @@ const kurunagaiAuth =(async (req, res) => {
             });
         }
         else{
-            sendUnauthorized('Email or password incorrect.');
+            sendUnauthorized(res,'Email or password incorrect.');
         }
     }
     else
     {
-        sendUnauthorized('Unauthorized user.')
+        sendUnauthorized(res,'Unauthorized user.')
     }
 })
 
@@ -100,14 +100,13 @@ const kurunagaiLogout = ((req, res) => {
 	res.redirect(process.env.CLIENT_URL);
 })
 
-function sendUnauthorized(message){
+function sendUnauthorized(res,message){
     res.status(401).json({
         statusCode: 401,
         succeded: true,
         message: message ,
     });
 }
-
 
 module.exports = { 
     googleLogout,
